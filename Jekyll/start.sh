@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/bin/sh
 
 if [ ! -f stamp_installed ];then
-  git clone REPO_GIT /usr/src/app
+  git clone $REPO_GIT /usr/src/app
   bundle install
   touch stamp_installed
 fi
