@@ -3,6 +3,7 @@ MAINTAINER MikaXII
 
 ENV JEKYLL_ENV=production
 ENV REPO_GIT=https://gitrepo
+ENV GITHUB_TOKEN=somegithubtoken
 
 RUN mkdir -p /usr/src/app
 
