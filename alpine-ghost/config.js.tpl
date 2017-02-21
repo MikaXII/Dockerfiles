@@ -11,7 +11,7 @@ config = {
     // When running Ghost in the wild, use the production environment.
     // Configure your URL and mail settings here
     production: {
-        url: "$GHOST_URL",
+        url: $GHOST_URL,
         mail: {},
         database: {
             client: 'sqlite3',
@@ -22,7 +22,7 @@ config = {
         },
 
         server: {
-            host: "$GHOST_IP",
+            host: $GHOST_IP,
             port: $GHOST_PORT
         }
     }
