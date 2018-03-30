@@ -1,0 +1,29 @@
+FROM node:8-stretch
+# Install dependencies 
+RUN apt-get update \
+   && apt-get -y install ffmpeg \
+   && rm /var/lib/apt/lists/* -fR
+
+#FROM node:8-alpine
+
+#ENV PEERTUBE_VERSION v1.0.0-beta.3
+
+# Install dependencies
+#RUN apk add --no-cache ffmpeg openssl bash make g++ git \
+# && apk add --no-cache --repository https://dl-3.alpinelinux.org/alpine/edge/testing/ vips-dev fftw-dev
+
+RUN mkdir -p /artifact/config
+RUN git clone https://github.com/Chocobozzz/PeerTube /app
+WORKDIR /app
+
+RUN git checkout $PEERTUBE_VERSION
+
+RUN yarn install --pure-lockfile && \
+    npm run build && \
+    rm -rf node_modules 
+
+RUN yarn install --pure-lockfile --production
+
+VOLUME ["/artifact"]
+
+CMD  mv dist node_modules package.json config/default.yaml client/ support/docker/production/config/* /artifact
